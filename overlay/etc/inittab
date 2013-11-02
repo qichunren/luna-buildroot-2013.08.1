@@ -26,7 +26,8 @@ null::sysinit:/bin/hostname `/sbin/ifconfig eth0 | cut -f11 -d' ' | sed 's/://g;
                          
 # Put a getty on the serial port
 #ttyO0::respawn:/sbin/getty -L ttyO0 115200 vt100 # GENERIC_SERIAL
-ttyO0::respawn:/bin/login -f root                                 
+#ttyO0::respawn:/bin/login -f root
+ttyO0::respawn:/root/autoupgrade.sh                                 
                                  
 # Stuff to do for the 3-finger salute
 ::ctrlaltdel:/sbin/reboot            

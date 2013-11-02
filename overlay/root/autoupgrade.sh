@@ -6,6 +6,8 @@ if read -t 3 response; then
 	/bin/login -f root
 else
 	echo "Upgrading"
-	/bin/login -f root
+	/boot/uboot/update_rootfs.sh
+	/boot/uboot/change_boot2rootfs.sh
+	reboot
 fi
 

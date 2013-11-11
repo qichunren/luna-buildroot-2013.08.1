@@ -17,7 +17,7 @@ do
 	echo 1 > /sys/class/gpio/gpio117/value
 	echo 0 > /sys/class/gpio/gpio18/value
 
-	sleep 2
+	sleep 3
 	echo 0 > /sys/class/gpio/gpio117/value; usleep 40000
 	echo 1 > /sys/class/gpio/gpio117/value; usleep 40000
 	echo 0 > /sys/class/gpio/gpio117/value; usleep 40000

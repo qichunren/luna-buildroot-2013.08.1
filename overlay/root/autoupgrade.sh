@@ -13,6 +13,13 @@ else
 	echo "Upgrading"
 	/boot/uboot/update_rootfs.sh
 	/boot/uboot/change_boot2rootfs.sh
+
+	sync
+	sleep 2
+	echo "TPS65910 rebooting"
+	/usr/sbin/i2cset -f -y 1 0x2d 0x3f 0x71
+	
+	#in case hard reset failed.
 	reboot
 fi
 

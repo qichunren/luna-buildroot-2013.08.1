@@ -6,7 +6,7 @@ OFFVAL=1
 PINMUX_STATE=7
 
 function set_gpio(){
-        echo $PINMUX_STATE > /sys/kernel/debug/omap_mux/${1}
+        echo $PINMUX_STATE > /sys/kernel/debug/omap_mux/${2}
         echo ${1} > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio${1}/direction
 }

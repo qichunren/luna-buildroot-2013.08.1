@@ -32,7 +32,7 @@ update_parts(){
   #flash parts 
   cd ${ROOTFS_PATH}
   rm -rf *
-  xzcat ${ROOTDIR_PATH}/dl/rootfs.tar.xz | tar xv
+  xzcat ${VARDIR_PATH}/dl/rootfs.tar.xz | tar xv
 
   cd ${ROOTFS_PATH}/var
   rm -rf *

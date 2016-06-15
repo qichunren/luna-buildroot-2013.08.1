@@ -4,7 +4,7 @@ echo  " " #empty line
 echo  "=================NOVOTECH UPGRADER==================" #title line
 echo  "Upgrading in 3 seconds, press any key to cancel!"
 
-/root/flash_led.sh &
+#/root/flash_led.sh &
 
 if read -t 4 response; then
 	echo "Cancelled!"

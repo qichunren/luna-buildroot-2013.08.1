@@ -18,7 +18,7 @@ mount_parts(){
 
   ## mount to correct dir
   mount ${ROOTFS_PART} ${ROOTFS_PATH}
-  #mount ${VARDIR_PART} ${VARDIR_PATH} #we don't need update var!
+  mount ${VARDIR_PART} ${VARDIR_PATH} #we don't need update var!
 }
 
 update_parts(){
@@ -35,8 +35,8 @@ update_parts(){
   xzcat ${VARDIR_PATH}/dl/rootfs.tar.xz | tar xv
 
   #we don't need update var!
-  #cd ${ROOTFS_PATH}/var 
-  #rm -rf *
+  cd ${ROOTFS_PATH}/var 
+  rm -rf *
 
 }
 
@@ -52,7 +52,7 @@ verify(){
 umount_parts(){
   cd ${DIR}
   umount ${ROOTFS_PART} || true
-  #umount ${VARDIR_PART} || true #we don't need update var!
+  umount ${VARDIR_PART} || true #we don't need update var!
 }
 
 #do the job

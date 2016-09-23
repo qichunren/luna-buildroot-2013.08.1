@@ -18,9 +18,11 @@ mount_parts(){
 
 change2rootfs(){
   sed -i "s/mmcblk0p3/mmcblk0p2/g" ${BOOTFS_PATH}/uEnv.txt
+  sed -i "s/{mmcrescuefs}/{mmcrootfs}/g" ${BOOTFS_PATH}/uEnv.txt
 }
 change2upfs(){
   sed -i "s/mmcblk0p2/mmcblk0p3/g" ${BOOTFS_PATH}/uEnv.txt
+  sed -i "s/{mmcrootfs}/{mmcrescuefs}/g" ${BOOTFS_PATH}/uEnv.txt
 
 }
 umount_parts(){

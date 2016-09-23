@@ -46,6 +46,7 @@ cleaning(){
 
 verify(){
   sed -i "s/mmcblk0p3/mmcblk0p2/g" ${BOOTFS_PATH}/uEnv.txt
+  sed -i "s/{mmcrescuefs}/{mmcrootfs}/g" ${BOOTFS_PATH}/uEnv.txt
 }
 
 umount_parts(){

@@ -71,9 +71,13 @@ umount_parts(){
 }
 
 #do the job
+/usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/paigo-upgrading.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+/usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading.wav" ! decodebin ! alsasink || true
 umount_parts
 mount_parts
 update_parts
 #verify
 cleaning
 umount_parts
+/usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/paigo-upgraded.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+/usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded.wav" ! decodebin ! alsasink || true

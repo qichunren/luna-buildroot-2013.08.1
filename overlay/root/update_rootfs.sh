@@ -61,27 +61,26 @@ mount_parts(){
 update_parts(){
   ##get parts
   if [ -f ${VARDIR_PATH}/dl/rootfs.tar.xz ]; then
-    echo "Already dl'ed."
+    echo "Detected rootfs package, flashing rootfs..."
+    #flash parts
+    mkfs.ext4 ${ROOTFS_PART}
+    mount ${ROOTFS_PART} ${ROOTFS_PATH}
+
+    cd ${ROOTFS_PATH}
+    xzcat ${VARDIR_PATH}/dl/rootfs.tar.xz | tar xv
+  
+    if [ -f ${VARDIR_PATH}/dl/kmods.tar.xz ]; then
+      xzcat ${VARDIR_PATH}/dl/kmods.tar.xz | tar xv
+    fi
+ 
+    #we don't need update var!
+    rm ${ROOTFS_PATH}/var/* -rf
   else
     echo "No update packages, skipping."
   fi
 
-  #flash parts
-  mkfs.ext4 ${ROOTFS_PART}
-  mount ${ROOTFS_PART} ${ROOTFS_PATH}
-
-  cd ${ROOTFS_PATH}
-  xzcat ${VARDIR_PATH}/dl/rootfs.tar.xz | tar xv
-  
-  if [ -f ${VARDIR_PATH}/dl/kmods.tar.xz ]; then
-    xzcat ${VARDIR_PATH}/dl/kmods.tar.xz | tar xv
-  fi
- 
-  #we don't need update var!
-  cd ${ROOTFS_PATH}/var 
-  rm -rf *
-
   if [ -f ${VARDIR_PATH}/dl/uImage ]; then
+    echo "Detected kernel uImage, updating kernel..."  
     cp ${VARDIR_PATH}/dl/uImage ${BOOTFS_PATH}/uImage
   fi
 }

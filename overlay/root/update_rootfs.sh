@@ -71,6 +71,11 @@ update_parts(){
   
     if [ -f ${VARDIR_PATH}/dl/kmods.tar.xz ]; then
       xzcat ${VARDIR_PATH}/dl/kmods.tar.xz | tar xv
+      cp ${VARDIR_PATH}/dl/kmods.tar.xz ${BOOTFS_PATH}/latest-kmods.tar.xz
+    else
+      if [ -f ${BOOTFS_PATH}/latest-kmods.tar.xz ]; then
+        xzcat ${BOOTFS_PATH}/latest-kmods.tar.xz | tar xv
+      fi
     fi
  
     #we don't need update var!

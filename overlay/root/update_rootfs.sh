@@ -3,6 +3,7 @@
 set -xe
 
 DIR=`pwd`
+PRODUCT_TYPE="Paigo" # Default product type is "Paigo"
 MMC_DEV=/dev/mmcblk0
 BOOTFS_PART=${MMC_DEV}p1
 ROOTFS_PART=${MMC_DEV}p2
@@ -56,6 +57,9 @@ mount_parts(){
   ## mount to correct dir
   mount ${BOOTFS_PART} ${BOOTFS_PATH}
   mount ${VARDIR_PART} ${VARDIR_PATH} #we don't need update var!
+  
+  ## Get product_type info, get /boot/uboot/product_type file first line content
+  product_type=$(head -n 1 ${BOOTFS_PATH}/product_type >/dev/null 2>/dev/null)
 }
 
 update_parts(){
@@ -109,13 +113,26 @@ umount_parts(){
 }
 
 #do the job
-/usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/paigo-upgrading.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-/usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading.wav" ! decodebin ! alsasink || true
 umount_parts
 mount_parts
+
+if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgrading.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading.wav" ! decodebin ! alsasink || true
+elif [ "$product_type" = "Augie" ]; then
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrading.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading.wav" ! decodebin ! alsasink || true
+fi
+
 update_parts
 #verify
 cleaning
 umount_parts
-/usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/paigo-upgraded.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-/usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded.wav" ! decodebin ! alsasink || true
+
+if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgraded.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded.wav" ! decodebin ! alsasink || true
+elif [ "$product_type" = "Augie" ]; then
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgraded.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded.wav" ! decodebin ! alsasink || true
+fi

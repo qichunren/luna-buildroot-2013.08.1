@@ -118,10 +118,10 @@ mount_parts
 
 if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
   /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgrading.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading.wav" ! decodebin ! alsasink || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading-cn.wav" ! decodebin ! alsasink || true
 elif [ "$product_type" = "Augie" ]; then
   /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrading.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading.wav" ! decodebin ! alsasink || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrading-en.wav" ! decodebin ! alsasink || true
 fi
 
 update_parts
@@ -131,8 +131,8 @@ umount_parts
 
 if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
   /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgraded.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded.wav" ! decodebin ! alsasink || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded-cn.wav" ! decodebin ! alsasink || true
 elif [ "$product_type" = "Augie" ]; then
   /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgraded.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded.wav" ! decodebin ! alsasink || true
+  /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgraded-en.wav" ! decodebin ! alsasink || true
 fi

@@ -59,7 +59,7 @@ mount_parts(){
   mount ${VARDIR_PART} ${VARDIR_PATH} #we don't need update var!
   
   ## Get product_type info, get /boot/uboot/product_type file first line content
-  product_type=$(head -n 1 ${BOOTFS_PATH}/product_type >/dev/null 2>/dev/null)
+  product_type=$(head -n 1 ${BOOTFS_PATH}/product_type 2>/dev/null)
 }
 
 update_parts(){

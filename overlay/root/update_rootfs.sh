@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -x
 
 DIR=`pwd`
 PRODUCT_TYPE="Paigo" # Default product type is "Paigo"
@@ -68,17 +68,69 @@ update_parts(){
     echo "Detected rootfs package, flashing rootfs..."
     #flash parts
     mkfs.ext4 ${ROOTFS_PART}
+
+    if [ $? != "0" ]; then
+        if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+        elif [ "$product_type" = "Augie" ]; then
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+        fi
+        exit 1
+    fi
+
     mount ${ROOTFS_PART} ${ROOTFS_PATH}
+    if [ $? != "0" ]; then
+        if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+        elif [ "$product_type" = "Augie" ]; then
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+        fi
+        exit 2
+    fi
 
     cd ${ROOTFS_PATH}
     xzcat ${VARDIR_PATH}/dl/rootfs.tar.xz | tar xv
+    if [ $? != "0" ]; then
+        if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+        elif [ "$product_type" = "Augie" ]; then
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+        fi
+        exit 3
+    fi
   
     if [ -f ${VARDIR_PATH}/dl/kmods.tar.xz ]; then
       xzcat ${VARDIR_PATH}/dl/kmods.tar.xz | tar xv
+      if [ $? != "0" ]; then
+	if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
+	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+	elif [ "$product_type" = "Augie" ]; then
+	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+	fi
+	exit 4
+      fi
       cp ${VARDIR_PATH}/dl/kmods.tar.xz ${BOOTFS_PATH}/latest-kmods.tar.xz
     else
       if [ -f ${BOOTFS_PATH}/latest-kmods.tar.xz ]; then
         xzcat ${BOOTFS_PATH}/latest-kmods.tar.xz | tar xv
+        if [ $? != "0" ]; then
+		if [ "$product_type" = "" ] || [ "$product_type" = "Paigo" ]; then
+		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/cn/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+		elif [ "$product_type" = "Augie" ]; then
+		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
+		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+		fi
+	        exit 5
+         fi
       fi
     fi
  

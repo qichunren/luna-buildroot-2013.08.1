@@ -15,8 +15,9 @@ else
 	/root/change_boot2rootfs.sh
 
 	sync
-	reboot
-
+        # Reboot: send cmd to stm32 core, request power off for 2 seconds, then power up
+        stty -F /dev/ttyO1 speed 115200 raw
+        echo -en '\xa5\x01\x81\x0d\x00\x03\x00\x2b\x00\x01\xe7\xc4\x5a' > /dev/ttyO1
 	#if reboot cmd fails we should consider to use tps65910 reboot.
 	# plz note this will not work with tps65217 (ariaboard and beaglebone)
 	#sleep 2

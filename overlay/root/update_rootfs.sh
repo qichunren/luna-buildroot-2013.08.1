@@ -75,7 +75,7 @@ update_parts(){
             /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
         elif [ "$product_type" = "Augie" ]; then
             /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-en.wav" ! decodebin ! alsasink || true
         fi
         exit 1
     fi
@@ -87,7 +87,7 @@ update_parts(){
             /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
         elif [ "$product_type" = "Augie" ]; then
             /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-en.wav" ! decodebin ! alsasink || true
         fi
         exit 2
     fi
@@ -100,7 +100,7 @@ update_parts(){
             /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
         elif [ "$product_type" = "Augie" ]; then
             /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+            /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-en.wav" ! decodebin ! alsasink || true
         fi
         exit 3
     fi
@@ -113,7 +113,7 @@ update_parts(){
 	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
 	elif [ "$product_type" = "Augie" ]; then
 	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+	    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-en.wav" ! decodebin ! alsasink || true
 	fi
 	exit 4
       fi
@@ -127,7 +127,7 @@ update_parts(){
 		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
 		elif [ "$product_type" = "Augie" ]; then
 		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/images/en/paigo-upgrade-failed.png" ! pngdec ! videoconvert ! fbdevsink device="/dev/fb0" || true
-		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-cn.wav" ! decodebin ! alsasink || true
+		    /usr/bin/gst-launch-1.0 filesrc location="/usr/share/sounds/system-upgrade-failed-en.wav" ! decodebin ! alsasink || true
 		fi
 	        exit 5
          fi
